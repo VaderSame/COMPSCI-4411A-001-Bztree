@@ -1,3 +1,5 @@
+Intuition
+
 STEP 1
 Define the data structure for the BzTree. This includes the node structure and the tree itself, focusing on:
 
@@ -10,9 +12,27 @@ Define the data structure for the BzTree. This includes the node structure and t
         Root node.
         Utility functions for inserting, searching, and deleting keys.
 
+Step 2
+Implement the Insert Function
+    implement the insert function to:
+
+Add keys and values to the leaf node.
+    Split the node if it becomes too full (to simulate B+ Tree behavior).
+
 
 Programmatic Implementation
 
 Step 1: Define the Node and Tree Structure
     Create a Node class or structure to represent individual tree nodes.
     Implement a BzTree class to manage the root and provide operations like insert, search, and delete.
+
+Step 2: 
+    How Insertion Works in a Simplified BzTree
+        Case 1: If the root is a leaf:
+            Add the key to the root node.
+            Sort the keys after insertion to maintain order.
+            If the node overflows (exceeds a maximum size), split it into two nodes and promote the middle key to the parent (creating a new root if necessary).
+
+        Case 2: If the root is internal:
+            Recursively find the appropriate child node to insert the key.
+            Handle splits as needed during recursion.

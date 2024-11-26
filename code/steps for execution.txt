@@ -1,0 +1,73 @@
+Step 1: Define Objectives
+    Objective: Implement a simplified BzTree to replicate some key metrics from the paper, including throughput, latency, and scalability.
+What We'll Do:
+    Simulate the core operations (insert, update, delete, and search).
+    Implement concurrency using multi-threading.
+    Simulate crash recovery and measure recovery time.
+
+
+Step 2: Build the Core Data Structure
+    1.Theoretical Understanding:
+        The BzTree is a persistent B+ Tree with:
+            Latch-Free Design: Ensures no locks are used, enabling higher concurrency.
+            Persistent Multi-Word Compare-and-Swap (PMwCAS): A mechanism to atomically update multiple memory locations, ensuring data consistency.
+
+    2.Programmatic Implementation:
+        Define a node structure with:
+            Keys: Sorted list of keys.
+            Values: Corresponding values or pointers to child nodes.
+            Metadata: Information for concurrency control.
+
+        Implement basic operations:
+            Insert
+            Search
+            Delete
+    3.Simulate persistence by adding artificial delays for memory writes (sleep).
+
+    
+Step 3: Implement PMwCAS
+    Theoretical Understanding:
+    PMwCAS ensures atomic updates across multiple memory locations. It uses a descriptor to track changes and commit them atomically.
+
+    Programmatic Implementation:
+        1.Create a Descriptor class to manage the state of operations.
+        2.Use atomic CAS operations to commit updates.
+        3.Simulate persistent writes by flushing data to "disk" or delaying operations artificially.
+
+
+Step 4: Add Concurrency
+    Theoretical Understanding:
+    BzTree leverages a latch-free approach using atomic operations and PMwCAS.
+
+    Programmatic Implementation:
+        1.Use multi-threading (std::thread in C++ or similar).
+        2.Simulate concurrent reads and writes to the tree.
+        3.Track throughput (operations per second) and latency under different thread counts.
+
+
+Step 5: Simulate Recovery
+    Theoretical Understanding:
+    After a crash, descriptors are scanned to complete or rollback pending operations.
+
+    Programmatic Implementation:
+        1.Track ongoing operations in a log-like structure.
+        2.Simulate a crash by interrupting operations.
+        3.Measure recovery time by replaying or rolling back operations from the descriptor log.
+
+
+Step 6: Benchmarking and Results
+What We'll Measure:
+    1. Throughput: Operations per second under varying workloads.
+    2.Latency: Time per operation (average and max).
+    3.Scalability: Performance as threads increase (e.g., 1, 4, 8 threads).
+    4.Recovery Time: Time to restore consistency after a crash.
+
+
+What We'll Need for the Program
+    Language: 
+        C++ (ideal for memory manipulation and multi-threading).
+    Tools:
+        A simple timing library for benchmarking.
+        Thread management for concurrency.
+    Environment: 
+        Simulated NVM with artificial delays to mimic persistence.

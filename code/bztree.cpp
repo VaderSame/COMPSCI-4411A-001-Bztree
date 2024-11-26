@@ -102,7 +102,9 @@ private:
         parent->children.insert(parent->children.begin() + index + 1, sibling);
 
         // Clear the middle key from the child
-        child->keys.pop_back();
+        if (!child->isLeaf) {
+            child->keys.pop_back(); // Remove the middle key
+        }
     }
 
     // Recursive search helper
